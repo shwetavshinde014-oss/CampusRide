@@ -1,7 +1,7 @@
 """
-CampusRide Streamlit - Design System & Custom CSS
-Light theme: warm neutral canvas, navy text, teal accents.
-Keeps Streamlit widgets readable even when browser/app theme is dark.
+CampusRide — Light Design System
+Readable light theme with navy text, teal accents, and consistent Streamlit widgets.
+Replace the existing styles.py with this file.
 """
 
 import streamlit as st
@@ -13,84 +13,110 @@ def inject_custom_styles():
         <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-        /* ---------- Base theme ---------- */
         :root {
             color-scheme: light;
             --cr-bg: #F8FAFC;
             --cr-surface: #FFFFFF;
             --cr-text: #172033;
-            --cr-muted: #475569;
-            --cr-border: #E2E8F0;
+            --cr-muted: #52627A;
+            --cr-border: #D9E2EC;
             --cr-teal: #0D9488;
             --cr-teal-dark: #0F766E;
+            --cr-teal-pale: #F0FDFA;
         }
 
         html, body, [class*="css"], [data-testid="stAppViewContainer"] {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+        }
+
+        html, body, .stApp, [data-testid="stAppViewContainer"] {
+            background: var(--cr-bg) !important;
             color: var(--cr-text) !important;
         }
 
-        html, body {
-            background: var(--cr-bg) !important;
-        }
-
-        .stApp,
-        [data-testid="stAppViewContainer"],
+        /* Main page and content */
         [data-testid="stMain"],
-        [data-testid="stMainBlockContainer"] {
+        [data-testid="stMainBlockContainer"],
+        .block-container {
             background: var(--cr-bg) !important;
             color: var(--cr-text) !important;
         }
 
-        /* Streamlit header / toolbar */
+        .block-container {
+            padding-top: 2rem !important;
+            padding-bottom: 2rem !important;
+            max-width: 1600px;
+        }
+
+        /* Streamlit header and toolbar */
         header[data-testid="stHeader"],
         [data-testid="stToolbar"] {
             background: #FFFFFF !important;
+        }
+
+        header[data-testid="stHeader"] {
+            border-bottom: 1px solid var(--cr-border) !important;
+        }
+
+        /* All regular text */
+        [data-testid="stMarkdownContainer"],
+        [data-testid="stMarkdownContainer"] p,
+        [data-testid="stMarkdownContainer"] li,
+        [data-testid="stMarkdownContainer"] span,
+        [data-testid="stText"],
+        [data-testid="stCaptionContainer"],
+        .stMarkdown, .stText, .stCaption {
             color: var(--cr-text) !important;
         }
 
-        /* ---------- Sidebar ---------- */
-        section[data-testid="stSidebar"],
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--cr-text) !important;
+            font-family: 'Inter', sans-serif !important;
+            font-weight: 700 !important;
+        }
+
+        p, label, span, small {
+            color: inherit;
+        }
+
+        [data-testid="stCaptionContainer"],
+        .stCaption {
+            color: var(--cr-muted) !important;
+        }
+
+        /* Sidebar */
+        section[data-testid="stSidebar"] {
+            background: #FFFFFF !important;
+            border-right: 1px solid var(--cr-border) !important;
+        }
+
         section[data-testid="stSidebar"] > div {
             background: #FFFFFF !important;
-            color: var(--cr-text) !important;
-            border-right: 1px solid var(--cr-border);
         }
 
-        section[data-testid="stSidebar"] * {
-            color: var(--cr-text);
-        }
-
+        section[data-testid="stSidebar"] [data-testid="stMarkdownContainer"],
         section[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p,
-        section[data-testid="stSidebar"] [data-testid="stCaptionContainer"],
-        section[data-testid="stSidebar"] small {
-            color: var(--cr-muted) !important;
+        section[data-testid="stSidebar"] label,
+        section[data-testid="stSidebar"] span,
+        section[data-testid="stSidebar"] h1,
+        section[data-testid="stSidebar"] h2,
+        section[data-testid="stSidebar"] h3,
+        section[data-testid="stSidebar"] h4 {
+            color: var(--cr-text) !important;
         }
 
-        /* ---------- Typography ---------- */
-        .stApp h1, .stApp h2, .stApp h3, .stApp h4,
-        .stApp p, .stApp label, .stApp li,
-        .stApp [data-testid="stMarkdownContainer"] {
-            color: var(--cr-text);
+        /* Cards used by CampusRide */
+        .cr-brand-card, .cr-card, .cr-metric {
+            background: var(--cr-surface) !important;
+            color: var(--cr-text) !important;
+            border: 1px solid var(--cr-border) !important;
+            border-radius: 12px !important;
+            box-shadow: 0 2px 8px rgba(15, 23, 42, 0.045) !important;
         }
 
-        .stApp h1, .stApp h2, .stApp h3, .stApp h4 {
-            font-weight: 700;
-        }
-
-        .stCaption, [data-testid="stCaptionContainer"] {
-            color: var(--cr-muted) !important;
-        }
-
-        /* ---------- Cards ---------- */
         .cr-brand-card {
-            background: #FFFFFF;
-            color: var(--cr-text);
-            border: 1px solid var(--cr-border);
-            border-radius: 12px;
             padding: 16px 20px;
             margin-bottom: 20px;
-            box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -100,89 +126,91 @@ def inject_custom_styles():
         .cr-brand-title {
             font-size: 18px;
             font-weight: 700;
-            color: #0F172A;
-            letter-spacing: -0.02em;
+            color: var(--cr-text) !important;
             margin: 0;
         }
 
         .cr-brand-tagline {
             font-size: 12px;
-            color: #475569;
+            color: var(--cr-muted) !important;
             margin-top: 2px;
-            font-weight: 400;
         }
 
         .cr-card {
-            background: #FFFFFF;
-            color: #172033;
-            border: 1px solid #E2E8F0;
-            border-radius: 10px;
             padding: 16px;
             margin-bottom: 16px;
-            box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
         }
 
+        .cr-metric {
+            padding: 14px;
+            text-align: left;
+        }
+
+        .cr-metric-label {
+            color: var(--cr-muted) !important;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .04em;
+        }
+
+        .cr-metric-value {
+            color: var(--cr-text) !important;
+            font-size: 22px;
+            font-weight: 800;
+            margin-top: 4px;
+        }
+
+        .cr-metric-subtitle {
+            color: var(--cr-teal-dark) !important;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        /* Badges */
         .cr-badge {
             display: inline-flex;
             align-items: center;
             gap: 6px;
             padding: 4px 10px;
-            border-radius: 9999px;
+            border-radius: 999px;
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: .04em;
         }
 
         .cr-badge-live {
-            background: #F0FDF4;
+            background: #ECFDF5 !important;
             color: #166534 !important;
-            border: 1px solid #BBF7D0;
+            border: 1px solid #BBF7D0 !important;
         }
 
         .cr-badge-stale {
-            background: #FFFBEB;
+            background: #FFFBEB !important;
             color: #92400E !important;
-            border: 1px solid #FDE68A;
+            border: 1px solid #FDE68A !important;
         }
 
         .cr-badge-admin {
-            background: #EFF6FF;
-            color: #1E40AF !important;
-            border: 1px solid #BFDBFE;
+            background: #EFF6FF !important;
+            color: #1D4ED8 !important;
+            border: 1px solid #BFDBFE !important;
         }
 
         .cr-badge-student {
-            background: #F0FDFA;
+            background: #F0FDFA !important;
             color: #0F766E !important;
-            border: 1px solid #99F6E4;
+            border: 1px solid #99F6E4 !important;
         }
 
-        /* ---------- ETA ---------- */
-        .cr-eta-card {
-            background: #F0FDFA;
-            color: #134E4A;
-            border: 1px solid #99F6E4;
-            border-radius: 10px;
-            padding: 16px;
-            text-align: center;
-            margin-bottom: 16px;
-        }
-
-        .cr-eta-value {
-            font-size: 28px;
-            font-weight: 800;
-            color: #0D9488 !important;
-            line-height: 1.1;
-            margin: 4px 0;
-        }
-
-        /* ---------- GPS warning ---------- */
+        /* GPS stale banner */
         .cr-stale-banner {
-            background: #FFFBEB;
-            color: #78350F;
-            border: 1px solid #FCD34D;
-            border-radius: 8px;
+            background: #FFFBEB !important;
+            color: #78350F !important;
+            border: 1px solid #FCD34D !important;
+            border-radius: 10px;
             padding: 12px 16px;
             margin-bottom: 16px;
             display: flex;
@@ -191,248 +219,208 @@ def inject_custom_styles():
         }
 
         .cr-stale-title {
-            font-weight: 700;
             color: #92400E !important;
-            font-size: 13px;
+            font-size: 14px;
+            font-weight: 700;
             margin: 0;
         }
 
         .cr-stale-desc {
-            font-size: 12px;
             color: #92400E !important;
-            margin: 2px 0 0 0;
+            font-size: 12px;
+            margin: 3px 0 0;
         }
 
-        /* ---------- Metrics ---------- */
-        .cr-metric {
-            background: #FFFFFF;
-            color: #172033;
-            border: 1px solid #E2E8F0;
-            border-radius: 8px;
-            padding: 14px;
-            text-align: left;
+        /* ETA */
+        .cr-eta-card {
+            background: var(--cr-teal-pale) !important;
+            color: var(--cr-text) !important;
+            border: 1px solid #99F6E4 !important;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 16px;
         }
 
-        .cr-metric-label {
-            font-size: 11px;
-            font-weight: 600;
-            color: #475569 !important;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
+        .cr-eta-value {
+            color: var(--cr-teal) !important;
+            font-size: 28px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin: 4px 0;
         }
 
-        .cr-metric-value {
-            font-size: 22px;
-            font-weight: 700;
-            color: #0F172A !important;
-            margin-top: 4px;
-        }
-
-        .cr-metric-subtitle {
-            font-size: 11px;
-            color: #0F766E !important;
-            font-weight: 500;
-            margin-top: 2px;
-        }
-
-        /* ---------- Inputs / selects / radio ---------- */
-        .stApp input,
-        .stApp textarea {
+        /* Inputs: text, password, number, date, time */
+        div[data-testid="stTextInput"] input,
+        div[data-testid="stNumberInput"] input,
+        div[data-testid="stDateInput"] input,
+        div[data-testid="stTimeInput"] input,
+        div[data-testid="stTextArea"] textarea {
             background: #FFFFFF !important;
             color: #172033 !important;
+            -webkit-text-fill-color: #172033 !important;
             border: 1px solid #CBD5E1 !important;
-            caret-color: #0D9488 !important;
-        }
-
-        .stApp input::placeholder,
-        .stApp textarea::placeholder {
-            color: #64748B !important;
-            opacity: 1 !important;
-        }
-
-        [data-baseweb="select"] > div {
-            background: #FFFFFF !important;
-            color: #172033 !important;
-            border-color: #CBD5E1 !important;
-        }
-
-        [data-baseweb="select"] * {
-            color: #172033 !important;
-        }
-
-        [role="radiogroup"] label,
-        [data-testid="stCheckbox"] label {
-            color: #172033 !important;
-        }
-
-        /* Dropdown menu */
-        [data-baseweb="popover"],
-        [data-baseweb="menu"],
-        [role="listbox"] {
-            background: #FFFFFF !important;
-            color: #172033 !important;
-        }
-
-        [role="option"] {
-            color: #172033 !important;
-        }
-
-        /* ---------- Buttons ---------- */
-        div.stButton > button,
-        div[data-testid="stFormSubmitButton"] > button {
-            background: #0D9488 !important;
-            color: #FFFFFF !important;
-            border: 1px solid #0F766E !important;
-            border-radius: 7px !important;
-            font-weight: 600 !important;
-            font-size: 13px !important;
-            padding: 6px 16px !important;
-            opacity: 1 !important;
-        }
-
-        div.stButton > button *,
-        div[data-testid="stFormSubmitButton"] > button * {
-            color: #FFFFFF !important;
-        }
-
-        div.stButton > button:hover,
-        div[data-testid="stFormSubmitButton"] > button:hover {
-            background: #0F766E !important;
-            border-color: #115E59 !important;
-        }
-
-        div.stButton > button:disabled {
-            background: #CBD5E1 !important;
-            color: #475569 !important;
-            border-color: #CBD5E1 !important;
-        }
-
-        /* Secondary buttons */
-        div.stButton > button[kind="secondary"] {
-            background: #FFFFFF !important;
-            color: #172033 !important;
-            border: 1px solid #CBD5E1 !important;
-        }
-
-        div.stButton > button[kind="secondary"] * {
-            color: #172033 !important;
-        }
-
-        div.stButton > button[kind="secondary"]:hover {
-            background: #F1F5F9 !important;
-            border-color: #94A3B8 !important;
-        }
-
-        /* ---------- Alerts ---------- */
-        [data-testid="stAlert"] {
-            color: #172033 !important;
-            opacity: 1 !important;
-        }
-
-        [data-testid="stAlert"] p,
-        [data-testid="stAlert"] [data-testid="stMarkdownContainer"] {
-            color: #172033 !important;
-        }
-
-        /* ---------- Tables / dataframe ---------- */
-        [data-testid="stDataFrame"],
-        [data-testid="stTable"] {
-            background: #FFFFFF !important;
-            color: #172033 !important;
-            border: 1px solid #E2E8F0;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        /* ---------- Tabs / expanders ---------- */
-        [data-testid="stTabs"] button,
-        [data-testid="stExpander"] summary {
-            color: #172033 !important;
-        }
-
-        [data-testid="stExpander"] {
-            background: #FFFFFF !important;
-            border: 1px solid #E2E8F0 !important;
             border-radius: 8px !important;
         }
 
-        /* Avoid faded/disabled-looking general text */
-        .stApp,
-        .stApp * {
-            text-shadow: none;
-        }
-
-
-        /* ---------- High-contrast login and form overrides ---------- */
-        [data-testid="stWidgetLabel"],
-        [data-testid="stWidgetLabel"] *,
-        [data-testid="stMarkdownContainer"] p,
-        [data-testid="stCaptionContainer"],
-        [data-testid="stCaptionContainer"] *,
-        .stApp label,
-        .stApp small,
-        .stApp footer,
-        .stApp [data-testid="stForm"] label {
-            color: #172033 !important;
-            opacity: 1 !important;
-        }
-
-        /* Placeholder and input text */
-        .stApp input,
-        .stApp textarea,
-        .stApp [data-baseweb="input"] input,
-        .stApp [data-baseweb="textarea"] textarea {
-            background-color: #FFFFFF !important;
-            color: #172033 !important;
-            -webkit-text-fill-color: #172033 !important;
-            opacity: 1 !important;
-        }
-
-        .stApp input::placeholder,
-        .stApp textarea::placeholder {
+        div[data-testid="stTextInput"] input::placeholder,
+        div[data-testid="stTextArea"] textarea::placeholder {
             color: #64748B !important;
             -webkit-text-fill-color: #64748B !important;
             opacity: 1 !important;
         }
 
-        /* Selects and dropdown values */
-        .stApp [data-baseweb="select"] *,
-        .stApp [role="combobox"] *,
-        .stApp [role="option"] {
+        div[data-testid="stTextInput"] label,
+        div[data-testid="stNumberInput"] label,
+        div[data-testid="stDateInput"] label,
+        div[data-testid="stTimeInput"] label,
+        div[data-testid="stTextArea"] label,
+        div[data-testid="stSelectbox"] label,
+        div[data-testid="stRadio"] label,
+        div[data-testid="stCheckbox"] label {
             color: #172033 !important;
-            opacity: 1 !important;
         }
 
-        /* Demo access heading and muted copy */
-        .stApp [data-testid="stMarkdownContainer"] h1,
-        .stApp [data-testid="stMarkdownContainer"] h2,
-        .stApp [data-testid="stMarkdownContainer"] h3,
-        .stApp [data-testid="stMarkdownContainer"] p,
-        .stApp [data-testid="stCaptionContainer"] {
+        /* Selectbox and dropdown */
+        div[data-testid="stSelectbox"] [data-baseweb="select"] > div,
+        div[data-testid="stMultiSelect"] [data-baseweb="select"] > div {
+            background: #FFFFFF !important;
             color: #172033 !important;
-            opacity: 1 !important;
+            border-color: #CBD5E1 !important;
         }
 
-        /* Keep all primary and demo buttons readable */
-        .stApp div.stButton > button,
-        .stApp div[data-testid="stFormSubmitButton"] > button {
-            background-color: #0D9488 !important;
+        div[data-testid="stSelectbox"] [data-baseweb="select"] *,
+        div[data-testid="stMultiSelect"] [data-baseweb="select"] * {
+            color: #172033 !important;
+        }
+
+        [data-baseweb="popover"],
+        [data-baseweb="menu"],
+        [role="listbox"],
+        [role="option"] {
+            background: #FFFFFF !important;
+            color: #172033 !important;
+        }
+
+        [role="option"]:hover {
+            background: #F1F5F9 !important;
+        }
+
+        /* Buttons and form submit buttons */
+        div[data-testid="stButton"] > button,
+        div[data-testid="stFormSubmitButton"] > button,
+        div.stButton > button,
+        button[kind="primary"] {
+            background: #0D9488 !important;
             color: #FFFFFF !important;
-            border: 1px solid #0F766E !important;
-            opacity: 1 !important;
+            -webkit-text-fill-color: #FFFFFF !important;
+            border: 1px solid #0D9488 !important;
+            border-radius: 8px !important;
+            font-weight: 700 !important;
+            box-shadow: none !important;
         }
 
-        .stApp div.stButton > button *,
-        .stApp div[data-testid="stFormSubmitButton"] > button * {
+        div[data-testid="stButton"] > button *,
+        div[data-testid="stFormSubmitButton"] > button *,
+        div.stButton > button *,
+        button[kind="primary"] * {
             color: #FFFFFF !important;
-            opacity: 1 !important;
+            -webkit-text-fill-color: #FFFFFF !important;
         }
 
-        .stApp div.stButton > button:hover,
-        .stApp div[data-testid="stFormSubmitButton"] > button:hover {
-            background-color: #0F766E !important;
+        div[data-testid="stButton"] > button:hover,
+        div[data-testid="stFormSubmitButton"] > button:hover,
+        div.stButton > button:hover,
+        button[kind="primary"]:hover {
+            background: #0F766E !important;
+            border-color: #0F766E !important;
+            color: #FFFFFF !important;
         }
 
+        /* Secondary buttons */
+        button[kind="secondary"] {
+            background: #FFFFFF !important;
+            color: #172033 !important;
+            -webkit-text-fill-color: #172033 !important;
+            border: 1px solid #CBD5E1 !important;
+        }
+
+        button[kind="secondary"] * {
+            color: #172033 !important;
+            -webkit-text-fill-color: #172033 !important;
+        }
+
+        button[kind="secondary"]:hover {
+            background: #F1F5F9 !important;
+            border-color: #94A3B8 !important;
+        }
+
+        button:disabled {
+            background: #E2E8F0 !important;
+            color: #64748B !important;
+            -webkit-text-fill-color: #64748B !important;
+            border-color: #CBD5E1 !important;
+        }
+
+        /* Tabs */
+        [data-testid="stTabs"] button,
+        [data-testid="stTabs"] button p {
+            color: #334155 !important;
+        }
+
+        [data-testid="stTabs"] button[aria-selected="true"],
+        [data-testid="stTabs"] button[aria-selected="true"] p {
+            color: #0F766E !important;
+        }
+
+        /* Radio, checkbox, slider */
+        div[data-testid="stRadio"] *,
+        div[data-testid="stCheckbox"] *,
+        div[data-testid="stSlider"] * {
+            color: #172033 !important;
+        }
+
+        /* Alerts and status messages */
+        div[data-testid="stAlert"] {
+            color: #172033 !important;
+            border-radius: 10px !important;
+        }
+
+        div[data-testid="stAlert"] p,
+        div[data-testid="stAlert"] span {
+            color: inherit !important;
+        }
+
+        /* Tables */
+        [data-testid="stDataFrame"],
+        [data-testid="stTable"] {
+            background: #FFFFFF !important;
+            border: 1px solid #D9E2EC !important;
+            border-radius: 8px !important;
+        }
+
+        /* Horizontal rules */
+        hr {
+            border-color: #D9E2EC !important;
+        }
+
+        /* Links */
+        a, a:visited {
+            color: #0F766E !important;
+        }
+
+        /* Keep the dashboard comfortable on narrower screens */
+        @media (max-width: 900px) {
+            .block-container {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+
+            .cr-brand-card {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
         </style>
         """,
         unsafe_allow_html=True,
