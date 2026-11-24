@@ -362,6 +362,77 @@ def inject_custom_styles():
             text-shadow: none;
         }
 
+
+        /* ---------- High-contrast login and form overrides ---------- */
+        [data-testid="stWidgetLabel"],
+        [data-testid="stWidgetLabel"] *,
+        [data-testid="stMarkdownContainer"] p,
+        [data-testid="stCaptionContainer"],
+        [data-testid="stCaptionContainer"] *,
+        .stApp label,
+        .stApp small,
+        .stApp footer,
+        .stApp [data-testid="stForm"] label {
+            color: #172033 !important;
+            opacity: 1 !important;
+        }
+
+        /* Placeholder and input text */
+        .stApp input,
+        .stApp textarea,
+        .stApp [data-baseweb="input"] input,
+        .stApp [data-baseweb="textarea"] textarea {
+            background-color: #FFFFFF !important;
+            color: #172033 !important;
+            -webkit-text-fill-color: #172033 !important;
+            opacity: 1 !important;
+        }
+
+        .stApp input::placeholder,
+        .stApp textarea::placeholder {
+            color: #64748B !important;
+            -webkit-text-fill-color: #64748B !important;
+            opacity: 1 !important;
+        }
+
+        /* Selects and dropdown values */
+        .stApp [data-baseweb="select"] *,
+        .stApp [role="combobox"] *,
+        .stApp [role="option"] {
+            color: #172033 !important;
+            opacity: 1 !important;
+        }
+
+        /* Demo access heading and muted copy */
+        .stApp [data-testid="stMarkdownContainer"] h1,
+        .stApp [data-testid="stMarkdownContainer"] h2,
+        .stApp [data-testid="stMarkdownContainer"] h3,
+        .stApp [data-testid="stMarkdownContainer"] p,
+        .stApp [data-testid="stCaptionContainer"] {
+            color: #172033 !important;
+            opacity: 1 !important;
+        }
+
+        /* Keep all primary and demo buttons readable */
+        .stApp div.stButton > button,
+        .stApp div[data-testid="stFormSubmitButton"] > button {
+            background-color: #0D9488 !important;
+            color: #FFFFFF !important;
+            border: 1px solid #0F766E !important;
+            opacity: 1 !important;
+        }
+
+        .stApp div.stButton > button *,
+        .stApp div[data-testid="stFormSubmitButton"] > button * {
+            color: #FFFFFF !important;
+            opacity: 1 !important;
+        }
+
+        .stApp div.stButton > button:hover,
+        .stApp div[data-testid="stFormSubmitButton"] > button:hover {
+            background-color: #0F766E !important;
+        }
+
         </style>
         """,
         unsafe_allow_html=True,
